@@ -1,9 +1,14 @@
+import os
+
 import pandas as pd
 import re
 from datasets import load_dataset
 
 # ------------------------------ Dataset Config ------------------------------ #
-DATA_SET_2_PATH = "prototype/data/cleaned/PRDECT-ID_cleaned.csv"
+# Resolved relative to this file's own location (not the caller's cwd), so it
+# works whether this is imported from a notebook, run as a script, or run from
+# a different working directory entirely.
+DATA_SET_2_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "cleaned", "PRDECT-ID_cleaned.csv")
 DATA_SET_3_HF = "AIbnuHibban/e-commerce-sentiment-bahasa-indonesia" # Hugging Face Path
 
 # ---------------------------------- Cleaners --------------------------------- #
