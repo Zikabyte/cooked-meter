@@ -13,6 +13,17 @@ def tokenize(text):
     """Lowercase a review and split it into alphabetic word tokens."""
     return re.findall(r"\b[a-z]+\b", str(text).lower())
 
+def clean_review_text(text):
+    """Replicate the Review_Clean preprocessing (lowercase, strip URLs,
+    collapse excessively repeated letters/punctuation, normalize whitespace)
+    on new, raw review text -- e.g. a review typed live in demo.ipynb --
+    so it matches what Model A/B were trained on."""
+    text = str(text).lower()
+    text = re.sub(r"https?://\S+|www\.\S+", " ", text)
+    text = re.sub(r"(.)\1{2,}", r"\1\1", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
 def clean_dataset3():
     """Load Dataset 3 from Hugging Face and clean it: flag rows with a
     linguistic-phenomenon category, drop full-row duplicates, and add
